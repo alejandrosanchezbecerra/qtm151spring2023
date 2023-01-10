@@ -1,7 +1,0 @@
--- CREATE TABLE EMP(id varchar(30))
-
-
--- INSERT INTO EMP(id) VALUES
-
-
-SELECT*FROM EMP
