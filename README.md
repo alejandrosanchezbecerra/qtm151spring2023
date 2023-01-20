@@ -11,7 +11,7 @@ Go to "Computing Environment" > "Desktop/labtop version (recommended)" and follo
 
 You can find guides for software in "Computing Environment".
 
-## Additional Setup (optional)
+## Optional Setup
 
 If you are a previous Python user, or if you are experiencing issues with running Python, go to
 
