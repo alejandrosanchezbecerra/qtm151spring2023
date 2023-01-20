@@ -13,7 +13,7 @@ You can find guides for software in "Computing Environment".
 
 ## Advanced Setup
 
-If you are a previous Python user, or if you are experiencing issues with installing Python, go to
+If you are a previous Python user, or if you are experiencing issues with running Python, go to
 
 "Computing Environment" > "Desktop/Labtop version (recommended)" > "(optional) environment management"
 
