@@ -1,0 +1,6 @@
+# This file was added to tell Github to not update certain system files
+# when you update the repository
+
+# .DS_store is a system file created on a Mac
+**/.DS_Store
+
