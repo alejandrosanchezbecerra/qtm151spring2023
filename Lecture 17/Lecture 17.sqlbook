@@ -8,13 +8,10 @@ SQL is a language specializing in database management
 - Widely used in industry
 - Typical task is to extract data from server
 - Many concepts are similar to Python
-- As with Python, many different interfaces to code
 -- SQLBook: Markup
 # <span style="color:darkblue"> I. Connect to Local Server </span>
 
 <font size="5"> 
-
-
 
 Getting started:
 - Follow installation instructions on Github
@@ -31,6 +28,16 @@ panel on the left:
 -- Include comments with two dashes "--"
 -- Arguments in parenthesis, separated by a comma ","
 -- For strings, use single quotations '...', not double "...".
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common pitfall: </span>
+
+- Make sure to click on the "localhost" tab 
+- If you don't, you won't be able to run the code
+
+
+<img src="figures/serverconnection_sql_vscode-3.png" alt="drawing" width="300"/>
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Create SQL Table from Scratch </span>
 -- SQLBook: Markup
@@ -144,6 +151,9 @@ WHERE (nationality = 'German') AND (driver_id = 2);
 
 Aggregate
 -- SQLBook: Code
+-- To compute aggregate statistics use a statistic function,
+-- such as SUM() or AVG() 
+
 
 SELECT COUNT(*) AS num_rows,
        SUM(victories) AS sum_victories,
