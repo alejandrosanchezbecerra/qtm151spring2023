@@ -19,15 +19,6 @@ Getting started:
 panel on the left:
 
 <img src="figures/serverconnection_sql_vscode.png" alt="drawing" width="600"/>
--- SQLBook: Code
-
--- BASIC SYNTAX:
-
--- Commands separated by a semicolon ";"
--- Commands in upper case, inputs lower case
--- Include comments with two dashes "--"
--- Arguments in parenthesis, separated by a comma ","
--- For strings, use single quotations '...', not double "...".
 -- SQLBook: Markup
 <font size = "5">
 
@@ -49,6 +40,7 @@ Delete existing table
 -- If it doesn't exist nothing happens
 -- System commands are in upper case and user defined
 -- names are in lower case
+-- Comments are written with double dashes "--" rather than hastag (#)
 
 DROP TABLE IF EXISTS drivers;
 -- SQLBook: Markup
@@ -119,7 +111,7 @@ Try it yourself!
 Extracting columns from table
 -- SQLBook: Code
 -- SELECT extracts certain COLUMNS
--- FROM is used to indicate the 
+-- FROM is used to indicate the source table
 
 SELECT driver_id nationality FROM drivers;
 -- SQLBook: Markup
@@ -153,7 +145,7 @@ Aggregate
 -- SQLBook: Code
 -- To compute aggregate statistics use a statistic function,
 -- such as SUM() or AVG() 
-
+-- The AS is an alias which assigns a name to the aggregate statistic
 
 SELECT COUNT(*) AS num_rows,
        SUM(victories) AS sum_victories,
@@ -266,6 +258,15 @@ Equivalence:
 ```.groupby().agg() ``` $\ $ ```SELECT ... AS ... ```<br>
 $\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
 
+-- SQLBook: Code
+
+-- BASIC SYNTAX:
+
+-- Commands separated by a semicolon ";"
+-- Commands in upper case, inputs lower case
+-- Include comments with two dashes "--"
+-- Arguments in parenthesis, separated by a comma ","
+-- For strings, use single quotations '...', not double "...".
 -- SQLBook: Markup
 <font size="5"> 
 
