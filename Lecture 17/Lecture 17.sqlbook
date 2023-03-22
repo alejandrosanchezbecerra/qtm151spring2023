@@ -1,0 +1,276 @@
+-- SQLBook: Markup
+# <span style="color:darkblue"> Lecture 17 - Introduction to SQL </span>
+
+<font size = "5">
+
+SQL is a language specializing in database management
+
+- Widely used in industry
+- Typical task is to extract data from server
+- Many concepts are similar to Python
+-- SQLBook: Markup
+# <span style="color:darkblue"> I. Connect to Local Server </span>
+
+<font size="5"> 
+
+Getting started:
+- Follow installation instructions on Github
+- Create a new connection in the "Database" <br>
+panel on the left:
+
+<img src="figures/serverconnection_sql_vscode.png" alt="drawing" width="600"/>
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common pitfall: </span>
+
+- Make sure to click on the "localhost" tab 
+- If you don't, you won't be able to run the code
+
+
+<img src="figures/serverconnection_sql_vscode-3.png" alt="drawing" width="300"/>
+-- SQLBook: Markup
+# <span style="color:darkblue"> II. Create SQL Table from Scratch </span>
+-- SQLBook: Markup
+<font size = "5">
+
+Delete existing table
+-- SQLBook: Code
+-- If the table already exists we can drop it:
+-- If it doesn't exist nothing happens
+-- System commands are in upper case and user defined
+-- names are in lower case
+-- Comments are written with double dashes "--" rather than hastag (#)
+
+DROP TABLE IF EXISTS drivers;
+-- SQLBook: Markup
+<font size = "5">
+
+Create empty table from codebook
+-- SQLBook: Code
+-- Create empty TABLE called "drivers"
+-- This example has five arguments separated by a comma
+-- that contain the "column_name" and "column_type", respectively
+
+CREATE TABLE drivers(
+    driver_id int,
+    driver_name varchar(30),
+    nationality varchar(15),
+    victories int
+);    
+-- SQLBook: Markup
+<font size="5"> 
+
+Add rows to table
+-- SQLBook: Code
+-- "INSET INTO" adds rows with VALUES ... to the bottom of the table
+-- In SQL different lines need to be separated by a semicolon ";"
+-- You write system commands in capital letters to easily distinguish
+-- column names from system commands
+
+INSERT INTO drivers  VALUES (1, 'Lewis Hamilton','British',103);
+
+INSERT INTO drivers  VALUES (4, 'Fernando Alonso', 'Spanish',32);
+
+INSERT INTO drivers  VALUES (3, 'Sebastian Vettel', 'German',91);
+
+INSERT INTO drivers  VALUES (2, 'Michael Schumacher', 'German',53);
+
+-- SQLBook: Markup
+<font size="5"> 
+
+View the table in the VSC "Database" Panel
+
+$\qquad$ <img src="figures/view_table_sql.png" alt="drawing" width="350"/>
+
+-- SQLBook: Code
+-- In SQL, a set of tables is called a "Schema"
+-- Click "refresh" to see changes
+-- The pencil button edits column attributes
+-- The three-stripes button opens the table
+-- SQLBook: Markup
+<font size="5"> 
+
+Try it yourself!
+
+- Add two/three more rows on your own
+-- SQLBook: Code
+-- Add your name/nationality and your neighbors'
+-- Select a new driver id (needs to be unique)
+-- Make sure to deparate arguments by a semicolon!
+
+
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> II. Dataset Operations </span>
+
+
+<font size="5"> 
+
+Extracting columns from table
+-- SQLBook: Code
+-- SELECT extracts certain COLUMNS
+-- FROM is used to indicate the source table
+
+SELECT driver_id, nationality FROM drivers;
+-- SQLBook: Markup
+<font size="5"> 
+
+Extract all columns from table
+-- SQLBook: Code
+-- The symbol "*" is a shorthand for "all variables"
+SELECT * FROM drivers;
+-- SQLBook: Markup
+<font size = "5">
+
+Subsetting rows
+-- SQLBook: Code
+-- The WHERE command evaluates logical conditions to subset rows
+SELECT * FROM drivers
+WHERE nationality = 'German';
+
+-- Evalute OR conditions
+SELECT * FROM drivers
+WHERE (nationality = 'United States') OR (nationality = 'Indian');
+
+-- Evaluate AND conditions
+SELECT * FROM drivers
+WHERE (nationality = 'German') AND (driver_id = 2);
+
+-- SQLBook: Markup
+<font size="5"> 
+
+Aggregate
+-- SQLBook: Code
+-- To compute aggregate statistics use a statistic function,
+-- such as SUM() or AVG() 
+-- The AS is an alias which assigns a name to the aggregate statistic
+
+SELECT SUM(victories) AS sum_victories,
+       COUNT(*) AS num_rows,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers;
+-- SQLBook: Markup
+<font size="5"> 
+
+Sort
+-- SQLBook: Code
+-- Order in ascending order of victories
+-- Remember that * means that all columns are selected
+SELECT * FROM drivers
+ORDER BY victories ASC;
+
+-- Order in descending order of victories
+SELECT * FROM drivers
+ORDER BY victories DESC;
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common pitfall: </span> Remember to use single quotes!
+
+
+
+-- SQLBook: Code
+-- The following code would NOT work because we used double quotations
+-- "Double quotations" are used to refer to column names
+SELECT * FROM drivers
+WHERE nationality = 'German';
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Select "nationality" and "driver_id" for drivers <br>
+with more than 60 victories
+-- SQLBook: Code
+-- Write your own code!
+
+
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> III. Groupby + Chaining </span>
+
+<font size="5"> 
+
+Groupby + Aggregate
+-- SQLBook: Code
+-- This command computes summary statistics by nationalitySELECT COUNT(*) AS num_rows,
+-- Including "nationality" (the grouping column) is optional in the select
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+GROUP BY nationality;
+-- SQLBook: Markup
+<font size = "5">
+
+Subsetting **after** aggregating
+-- SQLBook: Code
+-- This command computes the same table as above
+-- then filters with HAVING
+-- HAVING is the command you use to subset *after* aggregating
+-- This differs from WHERE which is use to subset *before* aggregating
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+GROUP BY nationality
+HAVING SUM(victories) > 50;
+-- SQLBook: Markup
+<font size = "5">
+
+Subsetting **before** and **after** aggregating
+-- SQLBook: Code
+-- HAVING is the command you use to subset *after* aggregating
+-- This differs from WHERE, which is used to subset *before* aggregating
+-- SQL differentiates the two types of subsetting
+
+SELECT nationality,
+       SUM(victories) AS sum_victories,
+       AVG(victories) AS mean_victories,
+       MIN(victories) AS min_victories,
+       MAX(victories) AS max_victories
+FROM drivers
+WHERE nationality = 'German'
+GROUP BY nationality
+HAVING SUM(victories) > 50;
+-- SQLBook: Markup
+# <span style="color:darkblue"> IV. Learning more </span>
+
+<font size = "5">
+
+Equivalence:
+
+**PYTHON** $\qquad \qquad \ \ $ **SQL** <br>
+```[] ``` $\qquad \qquad \qquad \ \ \ $ ```SELECT``` <br>
+```.query() ``` $\qquad \qquad $ ```WHERE``` (before aggregating) <br>
+```.query() ``` $\qquad \qquad $ ```HAVING``` (after aggregating) <br>
+```.groupby().agg() ``` $\ $ ```SELECT ... AS ... ```<br>
+$\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
+
+-- SQLBook: Code
+
+-- BASIC SYNTAX:
+
+-- Commands separated by a semicolon ";"
+-- Commands in upper case, inputs lower case
+-- Include comments with two dashes "--"
+-- Arguments in parenthesis, separated by a comma ","
+-- For strings, use single quotations '...', not double "...".
+-- SQLBook: Markup
+<font size="5"> 
+
+What are all the Postgre-SQL commands?
+
+https://www.postgresql.org/docs/current/sql-commands.html
+
+What else can you do?
+
+https://www.postgresql.org/docs/current/sql-select.html
