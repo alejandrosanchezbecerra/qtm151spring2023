@@ -101,7 +101,6 @@ Try it yourself!
 
 
 
-
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
 
@@ -113,7 +112,7 @@ Extracting columns from table
 -- SELECT extracts certain COLUMNS
 -- FROM is used to indicate the source table
 
-SELECT driver_id nationality FROM drivers;
+SELECT driver_id, nationality FROM drivers;
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -132,7 +131,7 @@ WHERE nationality = 'German';
 
 -- Evalute OR conditions
 SELECT * FROM drivers
-WHERE (nationality = 'German') OR (nationality = 'British');
+WHERE (nationality = 'United States') OR (nationality = 'Indian');
 
 -- Evaluate AND conditions
 SELECT * FROM drivers
@@ -147,12 +146,12 @@ Aggregate
 -- such as SUM() or AVG() 
 -- The AS is an alias which assigns a name to the aggregate statistic
 
-SELECT COUNT(*) AS num_rows,
-       SUM(victories) AS sum_victories,
+SELECT SUM(victories) AS sum_victories,
+       COUNT(*) AS num_rows,
        AVG(victories) AS mean_victories,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
-FROM drivers
+FROM drivers;
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -187,8 +186,6 @@ Try it yourself!
 with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
-
-
 
 
 
@@ -253,8 +250,8 @@ Equivalence:
 
 **PYTHON** $\qquad \qquad \ \ $ **SQL** <br>
 ```[] ``` $\qquad \qquad \qquad \ \ \ $ ```SELECT``` <br>
-```.query() ``` $\qquad \qquad $ ```WHERE``` (before subsetting) <br>
-```.query() ``` $\qquad \qquad $ ```HAVING``` (after subsetting) <br>
+```.query() ``` $\qquad \qquad $ ```WHERE``` (before aggregating) <br>
+```.query() ``` $\qquad \qquad $ ```HAVING``` (after aggregating) <br>
 ```.groupby().agg() ``` $\ $ ```SELECT ... AS ... ```<br>
 $\qquad \qquad \qquad \qquad \ $```GROUP BY```<br>
 
