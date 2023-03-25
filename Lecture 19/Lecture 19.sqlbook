@@ -114,7 +114,7 @@ from ".csv" files using the command <br>
 - Subset one of the above datasets using ``` GROUP BY ```
 - Name the aggregate statistic using ```AS```
 - Be prepared to use ```COUNT(*)```, ```COUNT(DISTINCT ...)``` <br>
-```AVG(...)```, ```SUM(...)```, ```MIN(...)```, ```MAX```
+```AVG(...)```, ```SUM(...)```, ```MIN(...)```, ```MAX(...)```
 
 
 HINT: See the end of lectures 17 and 18
