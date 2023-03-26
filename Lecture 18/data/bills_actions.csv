@@ -1,4 +1,4 @@
-congress,bill_number,bill_type,action,main_action,object,member_id
+Congress,bill_number,bill_type,action,main_action,object,member_id
 116,1029,s,S.Amdt.1274 Amendment SA 1274 proposed by Senator McConnell for Senator Cornyn. (consideration: CR S7233 ; text: CR S7233 ) In the nature of a substitute.,senate amendment proposed (on the floor),amendment,858
 116,1031,s,S.Amdt.2698 Amendment SA 2698 proposed by Senator Hawley. (consideration: CR S7394-7395 ; text: CR S7394-7395 ) In the nature of a substitute.,senate amendment proposed (on the floor),amendment,675
 116,1160,s,S.Amdt.2659 Amendment SA 2659 proposed by Senator McConnell for Senator Smith. (consideration: CR S5717 ; text: CR S5717 ) In the nature of a substitute.,senate amendment proposed (on the floor),amendment,858

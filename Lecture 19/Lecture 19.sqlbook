@@ -82,7 +82,7 @@ The quiz will use the Formula 1 dataset
 
 <font size = "5">
 
-(a) Create two empty tables 
+(a) Create empty table 
 
 - We will provide an image of the codebook <br>
 with column names and data types
@@ -95,7 +95,7 @@ with column names and data types
 (b) Import rows
 
 - Be able to find a paste the path of a file on your computer
-- For the two tables created in part (a) import the data <br>
+- For table created in part (a) import the data <br>
 from ".csv" files using the command <br>
 ```COPY ... FROM .... WITH ()```
 - Display the dataset using ``` SELECT * FROM .... ```
@@ -111,7 +111,7 @@ from ".csv" files using the command <br>
 -- SQLBook: Markup
 <font size = "5">
 
-(d) Groupby + Aggregate + Sort
+(d) Groupby + Aggregate
 
 - Subset one of the above datasets using ``` GROUP BY ```
 - Name the aggregate statistic using ```AS```
@@ -119,17 +119,20 @@ from ".csv" files using the command <br>
 ```AVG(...)```, ```SUM(...)```, ```MIN(...)```, ```MAX(...)```
 
 
+HINT: See the end of lectures 17
+-- SQLBook: Markup
+<font size = "5">
+
+(e) Groupby + Aggregate + Sort
+
+- Compute an aggregate statistict using ```GROUP BY```
+- Then sort using ``` ORDER BY ```
+
 HINT: See the end of lectures 17 and 18
 -- SQLBook: Markup
 <font size = "5">
 
-(e) Groupby + Aggregate + Subset
+(f) Groupby + Aggregate + Subset
 
 - Compute an aggregate statistict using ```GROUP BY```
 - Subset one of the above datasets using ``` HAVING ```
--- SQLBook: Markup
-<font size = "5">
-
-(d) Merge two tables
-
-- Merge the two tables using ``` LEFT JOIN ```
