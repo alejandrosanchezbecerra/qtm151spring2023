@@ -1,0 +1,138 @@
+-- SQLBook: Markup
+# <span style="color:darkblue"> Lecture 19 - Practicing SQL queries </span>
+
+<font size = "5">
+
+In  this lecture we will practice SQL commands (often) <br>
+called "SQL queries"
+
+- There will be a quiz on this lecture
+-- SQLBook: Markup
+# <span style="color:darkblue"> I. Review of SQL commands </span>
+
+-- SQLBook: Markup
+<font size = "5">
+
+Basic Syntax
+-- SQLBook: Code
+-- Commands separated by a semicolon ";"
+-- Commands in upper case, inputs lower case
+-- Include comments with two dashes "--"
+-- Arguments in parenthesis, separated by a comma ","
+-- For strings, use single quotations '...', not double "...".
+-- SQLBook: Markup
+<font size = "5">
+
+Data extraction
+-- SQLBook: Code
+-- All of the data extraction start with a SELECT ... FROM
+-- which has the following form
+-- The "*" is used to denote all the columns 
+
+--             SELECT * FROM datasetname
+--             SELECT colname1, colname2 FROM datasetname
+-- SQLBook: Markup
+<font size = "5">
+
+Data manipulation
+
+```GROUP BY``` $\qquad \qquad \qquad  $: Grouped operations <br>
+```ORDER BY .... ASC```  $\qquad $: Sort dataset in ascending order <br>
+```ORDER BY .... DSC```  $\qquad $: Sort dataset in descending order <br>
+```WHERE ```  $\qquad \qquad \qquad \quad \ $: Subsetting rows based on original columns<br>
+```HAVING ``` $\qquad \qquad \qquad \ \ \ $: Subsetting rows based on aggregate statistics <br>
+```LEFT JOIN ... ON ...``` $ \ \ \ $: Replacing values
+-- SQLBook: Markup
+<font size = "5">
+
+Import data
+-- SQLBook: Code
+-- Need to run all three of the following operations:
+
+-- (i) Delete table:
+--      DROP IF EXISTS table_name```
+
+-- (ii) Create headers of new table:
+--      CREATE TABLE table_name ( ... ) ```
+
+-- (iii) Import rows from CSV:
+--       COPY table_name
+--       FROM 'pathname'
+--       WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+-- SQLBook: Markup
+## <span style="color:darkblue"> III. Quiz Structure </span>
+
+<font size = "5">
+
+The day of the quiz I will ...
+- Provide a dataset with information
+- Give more specific instructions.
+- Below, you will see the type of questions that will be asked.
+- The idea is for you to apply known concepts to new data
+- You have 50 minutes to complete the assignment
+
+Questions
+
+(exact wording may change in quiz, but exercise will be very similar)
+
+The quiz will use the Formula 1 dataset
+
+-- SQLBook: Markup
+
+<font size = "5">
+
+(a) Create empty table 
+
+- We will provide an image of the codebook <br>
+with column names and data types
+- You will need to use the SQL command ``` CREATE TABLE ```
+
+-- SQLBook: Markup
+
+<font size = "5">
+
+(b) Import rows
+
+- Be able to find a paste the path of a file on your computer
+- For table created in part (a) import the data <br>
+from ".csv" files using the command <br>
+```COPY ... FROM .... WITH ()```
+- Display the dataset using ``` SELECT * FROM .... ```
+- See Lecture 18 for more details
+
+-- SQLBook: Markup
+<font size = "5">
+
+(c) Subset and sort
+
+- Subset one of the above datasets using ``` WHERE ```
+- Then sort the datasets in ascending or descending order 
+-- SQLBook: Markup
+<font size = "5">
+
+(d) Groupby + Aggregate
+
+- Subset one of the above datasets using ``` GROUP BY ```
+- Name the aggregate statistic using ```AS```
+- Be prepared to use ```COUNT(*)```, ```COUNT(DISTINCT ...)``` <br>
+```AVG(...)```, ```SUM(...)```, ```MIN(...)```, ```MAX(...)```
+
+
+HINT: See the end of lectures 17
+-- SQLBook: Markup
+<font size = "5">
+
+(e) Groupby + Aggregate + Sort
+
+- Compute an aggregate statistict using ```GROUP BY```
+- Then sort using ``` ORDER BY ```
+
+HINT: See the end of lectures 17 and 18
+-- SQLBook: Markup
+<font size = "5">
+
+(f) Groupby + Aggregate + Subset
+
+- Compute an aggregate statistict using ```GROUP BY```
+- Subset one of the above datasets using ``` HAVING ```

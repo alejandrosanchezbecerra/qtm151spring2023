@@ -1,0 +1,287 @@
+-- SQLBook: Markup
+# <span style="color:darkblue"> Lecture 18 - Import Tables in SQL </span>
+
+<font size = "5">
+
+In the previous class we ...
+
+- Connected to an SQL server
+- Introduced data manipulation basics
+
+In this class we will
+
+- Import data from ".csv" files
+- Review Entity Relationship Diagrams (ERD)
+- Merge tables
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> I. Create Headers for Empty Table </span>
+
+<font size = "5">
+
+United States Congress dataset
+
+<img src="figures/rdb_us_congress.png" alt="drawing" width="650"/>
+-- SQLBook: Code
+-- An entity relationship diagram presents, tables, attributes, and their
+-- connection between them. This is called "Crow's foot" notation
+-- because of the shape of the arrows, with three claws
+
+-- Examples:
+-- An arrow with "|" and "Crow's" says that there is a single entity
+-- on the left for each one on the right.
+-- SQLBook: Markup
+<font size = "5">
+
+Create table from codebook/dictionary
+-- SQLBook: Code
+-- Active: 1674444757671@@127.0.0.1@5432@postgres
+-- We start by deleting the old table
+-- SQL does not allow you to create a table if one already exists
+DROP TABLE IF EXISTS us_congress_members;
+
+-- Note in SQL the codebook is also called a "dictionary"
+-- The option PRIMARY KEY indicates that this is the unique identifier
+CREATE TABLE us_congress_members (
+        member_id    int PRIMARY KEY,
+        full_name    varchar(30),
+        last_name    varchar(30),
+        member_title varchar(30),
+        state        varchar(30),
+        party_name   varchar(30),
+        chamber      varchar(30)
+);
+-- SQLBook: Code
+-- (i) The NOT NULL option is a special restrition saying
+--     that you are not allowed to enter missing data for this column
+--     SQL includes a lot of data quality checks like this
+--     to maintain data integrity.
+-- (ii) The maximum length of the strings is another for of quality control
+-- (iii) Include any column names with upper case in double quotations "..."
+
+DROP TABLE IF EXISTS bills_actions;
+
+CREATE TABLE bills_actions (
+        "Congress"  int NOT NULL,
+        bill_number int ,
+        bill_type   varchar(30),
+        action      varchar(1000),
+        main_action varchar(50),
+        object      varchar(30),
+        member_id   int
+);
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common Pitfall:</span>
+Include columns with upper case letter <br>
+in double quotations, e.g. "Congress"
+
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Create a new table for "bills_subjects"
+-- SQLBook: Code
+-- Write your own code
+
+DROP TABLE IF exists bills_subjects;
+
+CREATE TABLE bills_subjects(
+    "Congress" int,
+    bill_number int,
+    bill_type varchar(30),
+    bill_subject varchar(30)
+)
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> II. Import CSV into SQL </span>
+
+<font size = "5">
+
+(a) **Connect** to your SQL server as in Lecture 17
+
+(b) **Copy the pathname** of the ".csv" file
+
+- Open the folder in VS-Code
+- Right click on the file
+- Select "Copy Path" and paste below
+
+$\quad$ <img src="figures/get_file_path.png" alt="drawing" width="400"/>
+
+
+(c) **Import row data**
+
+For the instructor's computer this is:
+
+<font size = "3">
+
+
+```sql
+COPY us_congress_members
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv' ```
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+```
+-- SQLBook: Code
+-- The argument associaated with COPY is the dataset in our server
+-- The argument associaated with FROM is a filepath name
+-- There are three options specified in WITH:
+-----  DELIMETER indicates values are comma separated ","
+-----  FORMAT indicates that this is a CSV
+-----  HEADER MATCH indicates that the first row contains column
+-----  names and should be ignored when importing.
+-- SQLBook: Markup
+<font size = "5">
+
+Interpreting Error Messages:
+-- SQLBook: Code
+-- NOTE 1: Sometimes HEADER MATCH will give an error if the 
+-- 'CSV' file contains columns that are out of order. If this happens
+--  either edit the order of "CREATE TABLE" above
+
+-- NOTE 2: Sometimes you will get an error if the table doesn't
+-- already exist. If this happens, it means that you haven't
+-- run the "CREATE TABLE" above.
+-- SQL doesn't allow you to import data without specifying the
+-- "codebook" first. In that sense it's quite different from Python.
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Import the table "us_congress_members.csv" using COPY
+- Use the following code to view the dataset
+
+```sql
+SELECT * FROM us_congress_members
+```
+-- SQLBook: Code
+-- Active: 1674444757671@@127.0.0.1@5432@postgres
+-- Write your own code
+-- Note in the instructor's computer this is:
+-- You just have to change the FROM argument
+--
+-- COPY us_congress_members
+-- FROM '/private/tmp/data/us_congress_members.csv'
+-- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+
+
+
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Copy the table "bills_actions.csv"
+- Use the following code to view the dataset
+
+```sql
+SELECT * FROM bills_actions
+```
+-- SQLBook: Code
+-- Write your own code
+-- Note in the instructor's computer this is:
+-- You just have to change the FROM argument
+--
+-- COPY bills_actions
+-- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
+-- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common Pitfalls: </span>
+
+- Make sure to enter the paths of the files! <br>
+ This is specific to each computer
+- Make sure that you've created a table before <br>
+using COPY
+
+
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> III. Merge Data </span>
+
+<font size = "5">
+
+<span style="color:red"> Common Pitfall: </span>
+Import the data before proceeding!
+-- SQLBook: Markup
+<font size = "5">
+
+Count unique rows
+-- SQLBook: Code
+-- COUNT(DISTINCT ) computes the number of unique rows
+-- "AS" is the alias or name of the statistic
+
+SELECT COUNT(DISTINCT party_name) AS num_distinct_parties,
+       COUNT(*) AS num_members       
+FROM us_congress_members
+-- SQLBook: Markup
+<font size = "5">
+Display unique rows
+-- SQLBook: Code
+SELECT party_name       
+FROM us_congress_members
+GROUP BY party_name
+-- SQLBook: Markup
+<font size = "5">
+
+Count members of group
+-- SQLBook: Code
+SELECT party_name,       
+       COUNT(*) AS num_members       
+FROM us_congress_members
+GROUP BY party_name;
+-- SQLBook: Markup
+<font size = "5">
+
+Merge Databases
+-- SQLBook: Code
+-- FROM indicates the primary dataset
+-- LEFT JOIN indicates the secondary dataset for merging
+-- ON ... = ... is the matching column
+-- We use the "." to indicate the key in each of the datasets
+-- The format is
+-----  ON data1.key = data2.key
+
+SELECT * 
+FROM bills_actions
+LEFT JOIN us_congress_members
+ON bills_actions.member_id  = bills_actions.member_id;
+
+-- Note: This command may take a few seconds to run. This is normal
+-- In the instructor's computer this took 2 min but may take more 
+-- or less in your computer
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Count the unique number of members by 'chamber'
+-- SQLBook: Code
+-- Write your own code
+
+
+
+
+
+-- SQLBook: Markup
+# <span style="color:darkblue"> IV. (Optional) Additional Resources </span>
+
+<font size = "5">
+
+Overview of SQL:
+
+https://www.youtube.com/watch?v=27axs9dO7AE
+
+Introduction to databases:
+
+https://www.youtube.com/watch?v=wR0jg0eQsZA
+
+Introduction to Entity Relationship Diagrams
+
+https://www.youtube.com/watch?v=wR0jg0eQsZA
