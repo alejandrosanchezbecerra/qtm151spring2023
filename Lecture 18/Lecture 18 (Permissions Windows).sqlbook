@@ -1,0 +1,21 @@
+-- SQLBook: Markup
+# <span style="color:darkblue"> Lecture 18 - Permissions Windows </span>
+
+<font size = "5">
+
+Sometimes you won't be able to use COPY because your SQL <br>
+does not have permission to access it. To fix it on Windows, <br>
+follow these steps:
+-- SQLBook: Markup
+<font size = "5">
+
+(1) Go the Github folder.
+
+- Right-click on the course folder.
+- Select the option properties
+-- SQLBook: Markup
+<font size = "5">
+
+(1) In the window that pops-up
+
+- Go to the "Security" tab
