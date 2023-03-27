@@ -35,7 +35,7 @@ United States Congress dataset
 
 Create table from codebook/dictionary
 -- SQLBook: Code
--- Active: 1674444757671@@127.0.0.1@5432@postgres
+-- Active: 1679515732880@@127.0.0.1@5432@postgres
 -- We start by deleting the old table
 -- SQL does not allow you to create a table if one already exists
 DROP TABLE IF EXISTS us_congress_members;
@@ -86,14 +86,6 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
-DROP TABLE IF exists bills_subjects;
-
-CREATE TABLE bills_subjects(
-    "Congress" int,
-    bill_number int,
-    bill_type varchar(30),
-    bill_subject varchar(30)
-)
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Import CSV into SQL </span>
@@ -157,15 +149,13 @@ Try it yourself!
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
--- Active: 1674444757671@@127.0.0.1@5432@postgres
 -- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
--- COPY us_congress_members
--- FROM '/private/tmp/data/us_congress_members.csv'
--- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
-
+COPY us_congress_members
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 
 
@@ -185,9 +175,9 @@ SELECT * FROM bills_actions
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
--- COPY bills_actions
--- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
--- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+COPY bills_actions
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 
 -- SQLBook: Markup
@@ -251,7 +241,7 @@ Merge Databases
 SELECT * 
 FROM bills_actions
 LEFT JOIN us_congress_members
-ON bills_actions.member_id  = bills_actions.member_id;
+ON us_congress_members.member_id  = bills_actions.member_id;
 
 -- Note: This command may take a few seconds to run. This is normal
 -- In the instructor's computer this took 2 min but may take more 
