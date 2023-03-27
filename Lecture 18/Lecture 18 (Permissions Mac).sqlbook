@@ -1,0 +1,35 @@
+-- SQLBook: Markup
+# <span style="color:darkblue"> Lecture 18 - Permissions Mac </span>
+
+<font size = "5">
+
+Sometimes you won't be able to use COPY because your SQL <br>
+does not have permission to access it. <br>
+
+To overcome these permission issues on a mac, you can copy <br>
+your files to a temporary folder. Follow these steps
+-- SQLBook: Markup
+<font size = "5">
+
+(1) Open the terminal
+
+- Type "open /tmp"
+- This will open a window in finder "tmp"
+-- SQLBook: Markup
+<font size = "5">
+
+(2) Copy the "data" folder in Lecture 18 to "tmp"
+
+- Do this by dragging and dropping the file <br>
+in the finder window
+-- SQLBook: Markup
+<font size = "5">
+
+(3) Get file pathname
+
+- In the "tmp" folder, enter the data
+- Hold the "Option" key on your keyboard
+- While you do, right Click on a ".csv" file, e.g. ```"us_congress_members.csv"```
+- Select the option 
+
+``` Copy "us_congress_members.csv" as PATHNAME ```
