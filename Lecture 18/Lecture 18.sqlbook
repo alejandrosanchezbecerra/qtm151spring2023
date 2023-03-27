@@ -83,7 +83,9 @@ Try it yourself!
 
 - Create a new table for "bills_subjects"
 -- SQLBook: Code
-# Write your own code
+-- Write your own code
+
+
 
 
 
@@ -149,7 +151,7 @@ Try it yourself!
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
-# Write your own code
+-- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
