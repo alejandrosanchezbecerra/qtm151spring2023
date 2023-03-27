@@ -85,9 +85,14 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
+DROP TABLE IF exists bills_subjects;
 
-
-
+CREATE TABLE bills_subjects(
+    "Congress" int,
+    bill_number int,
+    bill_type varchar(30),
+    bill_subject varchar(30)
+)
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Import CSV into SQL </span>
