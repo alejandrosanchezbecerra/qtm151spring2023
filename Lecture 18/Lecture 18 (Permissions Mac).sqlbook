@@ -60,7 +60,7 @@ You can keep the files in the original folder
 (3) Enter the command "\copy"
 
 - Run everything as a single line (otherwise it won't work)
-- Replace "us_congress_members" with the relevant table
+- Replace "data_name" with the relevant table
 - Replace the "pathname" with the file path
 -- SQLBook: Code
 \COPY data_name FROM 'data_path.csv' WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
