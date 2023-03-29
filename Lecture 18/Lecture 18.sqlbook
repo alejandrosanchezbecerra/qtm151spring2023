@@ -35,7 +35,7 @@ United States Congress dataset
 
 Create table from codebook/dictionary
 -- SQLBook: Code
--- Active: 1674444757671@@127.0.0.1@5432@postgres
+-- Active: 1679461941156@@127.0.0.1@5432@postgres@public
 -- We start by deleting the old table
 -- SQL does not allow you to create a table if one already exists
 DROP TABLE IF EXISTS us_congress_members;
@@ -124,6 +124,11 @@ FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv' ```
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 ```
 -- SQLBook: Code
+
+COPY us_congress_members
+FROM '/private/tmp/data/us_congress_members.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
 -- The argument associaated with COPY is the dataset in our server
 -- The argument associaated with FROM is a filepath name
 -- There are three options specified in WITH:
@@ -131,6 +136,8 @@ WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 -----  FORMAT indicates that this is a CSV
 -----  HEADER MATCH indicates that the first row contains column
 -----  names and should be ignored when importing.
+
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -145,6 +152,8 @@ Interpreting Error Messages:
 -- run the "CREATE TABLE" above.
 -- SQL doesn't allow you to import data without specifying the
 -- "codebook" first. In that sense it's quite different from Python.
+
+
 -- SQLBook: Markup
 <font size = "5">
 
@@ -185,9 +194,9 @@ SELECT * FROM bills_actions
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
 --
--- COPY bills_actions
--- FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
--- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+COPY bills_actions
+FROM '/Users/vincentwei/Documents/GitHub/qtm151spring2023/Lecture 18/data/bills_actions.csv'
+WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 
 
 -- SQLBook: Markup

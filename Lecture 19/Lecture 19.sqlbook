@@ -88,6 +88,8 @@ The quiz will use the Formula 1 dataset
 with column names and data types
 - You will need to use the SQL command ``` CREATE TABLE ```
 
+-- SQLBook: Code
+
 -- SQLBook: Markup
 
 <font size = "5">
@@ -100,6 +102,8 @@ from ".csv" files using the command <br>
 ```COPY ... FROM .... WITH ()```
 - Display the dataset using ``` SELECT * FROM .... ```
 - See Lecture 18 for more details
+
+-- SQLBook: Code
 
 -- SQLBook: Markup
 <font size = "5">
