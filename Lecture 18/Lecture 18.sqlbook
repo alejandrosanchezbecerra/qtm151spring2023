@@ -35,7 +35,7 @@ United States Congress dataset
 
 Create table from codebook/dictionary
 -- SQLBook: Code
--- Active: 1679515732880@@127.0.0.1@5432@postgres
+-- Active: 1680027197221@@127.0.0.1@5432@postgres
 -- We start by deleting the old table
 -- SQL does not allow you to create a table if one already exists
 DROP TABLE IF EXISTS us_congress_members;
@@ -86,15 +86,21 @@ Try it yourself!
 -- SQLBook: Code
 -- Write your own code
 
+DROP TABLE IF exists bills_subjects;
+
+CREATE TABLE bills_subjects(
+    "Congress" int,
+    bill_number int,
+    bill_type varchar(30),
+    bill_subject varchar(30)
+)
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Import CSV into SQL </span>
 
 <font size = "5">
 
-(a) **Connect** to your SQL server as in Lecture 17
-
-(b) **Copy the pathname** of the ".csv" file
+(a) **Copy the pathname** of the ".csv" file
 
 - Open the folder in VS-Code
 - Right click on the file
@@ -103,7 +109,7 @@ Try it yourself!
 $\quad$ <img src="figures/get_file_path.png" alt="drawing" width="400"/>
 
 
-(c) **Import row data**
+(b) **Import row data**
 
 For the instructor's computer this is:
 
@@ -112,10 +118,21 @@ For the instructor's computer this is:
 
 ```sql
 COPY us_congress_members
-FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv' ```
+FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv'
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 ```
+-- SQLBook: Markup
+<font size = "5">
+
+Try it yourself!
+
+- Import the table "us_congress_members.csv" using COPY
+- If you experience permission issues, see the <br> 
+additional ".sqlbooks" in this folder
+
 -- SQLBook: Code
+-- Write your own code
+--
 -- The argument associaated with COPY is the dataset in our server
 -- The argument associaated with FROM is a filepath name
 -- There are three options specified in WITH:
@@ -123,39 +140,28 @@ WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 -----  FORMAT indicates that this is a CSV
 -----  HEADER MATCH indicates that the first row contains column
 -----  names and should be ignored when importing.
--- SQLBook: Markup
-<font size = "5">
 
-Interpreting Error Messages:
--- SQLBook: Code
--- NOTE 1: Sometimes HEADER MATCH will give an error if the 
--- 'CSV' file contains columns that are out of order. If this happens
---  either edit the order of "CREATE TABLE" above
+-- You just have to change the FROM argument
 
--- NOTE 2: Sometimes you will get an error if the table doesn't
--- already exist. If this happens, it means that you haven't
--- run the "CREATE TABLE" above.
--- SQL doesn't allow you to import data without specifying the
--- "codebook" first. In that sense it's quite different from Python.
+
+
+
+
+
 -- SQLBook: Markup
+
 <font size = "5">
 
 Try it yourself!
 
-- Import the table "us_congress_members.csv" using COPY
-- Use the following code to view the dataset
+Use the following code to view the dataset
 
 ```sql
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
 -- Write your own code
--- Note in the instructor's computer this is:
--- You just have to change the FROM argument
---
-COPY us_congress_members
-FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv'
-WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
 
 
 
@@ -174,10 +180,11 @@ SELECT * FROM bills_actions
 -- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
---
-COPY bills_actions
-FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\bills_actions.csv'
-WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+-- COPY bills_actions
+-- FROM '/private/tmp/data/bills_actions.csv'
+-- WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+
 
 
 -- SQLBook: Markup
@@ -192,6 +199,20 @@ using COPY
 
 
 
+-- SQLBook: Markup
+<font size = "5">
+
+Interpreting Error Messages:
+-- SQLBook: Code
+-- NOTE 1: Sometimes HEADER MATCH will give an error if the 
+-- 'CSV' file contains columns that are out of order. If this happens
+--  either edit the order of "CREATE TABLE" above
+
+-- NOTE 2: Sometimes you will get an error if the table doesn't
+-- already exist. If this happens, it means that you haven't
+-- run the "CREATE TABLE" above.
+-- SQL doesn't allow you to import data without specifying the
+-- "codebook" first. In that sense it's quite different from Python.
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Merge Data </span>
 
