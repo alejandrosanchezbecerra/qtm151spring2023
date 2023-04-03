@@ -9,6 +9,8 @@ does not have permission to access it. <br>
 To overcome these permission issues on a mac, you can copy <br>
 your files to a temporary folder. Follow these steps
 -- SQLBook: Markup
+# <span style="color:darkblue"> Alternative A </span>
+-- SQLBook: Markup
 <font size = "5">
 
 (1) Open the terminal
@@ -33,3 +35,51 @@ in the finder window
 - Select the option 
 
 ``` Copy "us_congress_members.csv" as PATHNAME ```
+-- SQLBook: Markup
+# <span style="color:darkblue"> Alternative B </span>
+
+<font size = "5">
+
+With this alternative, you don't need to open the "tmp" folder <br>
+You can keep the files in the original folder
+-- SQLBook: Markup
+<font size = "5">
+
+(1) Go to Apps, and open "SQL shell" (psql)
+
+(2) **Carefully** enter the login credentials:
+
+- ```Server [localhost]```: Leave blank, enter "return" key
+- ```Database [postgres]:```: Leave blank and enter the "return" key
+- ``` Port [5432] ```:  Leave blank and enter the "return" key
+- ```Username [postgres]```: Leave blank and enter the "return" key
+- ```Password for user postgres```: Enter your SQL password, e.g. 12345
+-- SQLBook: Markup
+<font size = "5">
+
+(3) Enter the command "\copy"
+
+- Run everything as a single line (otherwise it won't work)
+- Replace "data_name" with the relevant table
+- Replace the "pathname" with the file path
+-- SQLBook: Code
+\COPY data_name FROM 'data_path.csv' WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
+
+-- Common error I:
+
+-- Sometime when you'll get an error saying
+-- "duplicate key value violates unique constraint"
+-- This is a quality control mechanism that prevents you from adding data twice
+-- No need to do anything. If you want to start over, just drop the table, create it
+-- and copy it again.
+
+-- Common Error II:
+-- You need to create a table using the code in Lecture 18 before copying the
+-- table!
+-- SQLBook: Markup
+<font size = "5">
+
+<span style="color:red"> Common Pitfalls: </span>
+- Write "\COPY" including the backslash. <br>
+This is special command that only works in the SQL terminal, <br>
+ and doesn't require permissions to import
