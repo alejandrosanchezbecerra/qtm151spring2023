@@ -124,6 +124,7 @@ FROM 'D:\GitHub\qtm151spring2023\Lecture 18\data\us_congress_members.csv' ```
 WITH (DELIMITER ',', FORMAT csv, HEADER MATCH);
 ```
 -- SQLBook: Code
+-- Active: 1679461941156@@127.0.0.1@5432@postgres
 
 COPY us_congress_members
 FROM '/private/tmp/data/us_congress_members.csv'
@@ -166,7 +167,7 @@ Try it yourself!
 SELECT * FROM us_congress_members
 ```
 -- SQLBook: Code
--- Active: 1674444757671@@127.0.0.1@5432@postgres
+-- Active: 1679461941156@@127.0.0.1@5432@postgres
 -- Write your own code
 -- Note in the instructor's computer this is:
 -- You just have to change the FROM argument
